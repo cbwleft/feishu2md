@@ -20,7 +20,7 @@ func handleConfigCommand(appId, appSecret string) error {
 		return err
 	}
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
-		config := core.NewConfig(appId, appSecret, "static")
+		config := core.NewConfig(appId, appSecret, "img")
 		if err = config.WriteConfig2File(configPath); err != nil {
 			return err
 		}
@@ -56,7 +56,7 @@ func handleUrlArgument(url string) error {
 		return err
 	}
 
-	reg := regexp.MustCompile("^https://[a-zA-Z0-9-]+.(feishu.cn|larksuite.com)/(docs|docx|wiki)/([a-zA-Z0-9]+)")
+	reg := regexp.MustCompile("^https://[a-zA-Z0-9-]+.(feishu.cn|larksuite.com|f.mioffice.cn)/(docs|docx|wiki)/([a-zA-Z0-9]+)")
 	matchResult := reg.FindStringSubmatch(url)
 	if matchResult == nil || len(matchResult) != 4 {
 		return fmt.Errorf("Invalid feishu/larksuite URL format\n")
